@@ -1,0 +1,19 @@
+{
+  "name": "react-autocompleter",
+  "version": "0.0.0",
+  "description": "React autocomplete component",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fterlid/react-autocompleter.git"
+  },
+  "author": "fte",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fterlid/react-autocompleter/issues"
+  },
+  "homepage": "https://github.com/fterlid/react-autocompleter#readme"
+}
