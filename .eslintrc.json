@@ -4,8 +4,9 @@
         "quotes": [2, "single"],
         "linebreak-style": [2, "windows"],
         "semi": [2, "always"],
+        "no-var": 2,
         "arrow-spacing": 2,
-        "space-after-keywords": 2,
+        "keyword-spacing": [2, {"before": false, "after": true}],
         "space-before-blocks": 2
     },
     "env": {
@@ -13,11 +14,15 @@
         "browser": true
     },
     "extends": "eslint:recommended",
-    "ecmaFeatures": {
-        "jsx": true,
-        "experimentalObjectRestSpread": true
-    },
     "plugins": [
         "react"
-    ]
+    ],
+    "parserOptions": {
+        "sourceType": "module",
+        "ecmaVersion": 6,
+        "ecmaFeatures": {
+            "jsx": true,
+            "experimentalObjectRestSpread": true
+        }
+    }
 }
