@@ -7,7 +7,8 @@
         "no-var": 2,
         "arrow-spacing": 2,
         "keyword-spacing": [2, {"before": false, "after": true}],
-        "space-before-blocks": 2
+        "space-before-blocks": 2,
+        "react/jsx-uses-vars": 2
     },
     "env": {
         "es6": true,
