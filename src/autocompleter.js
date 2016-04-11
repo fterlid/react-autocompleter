@@ -7,7 +7,10 @@ class Autocompleter extends React.Component {
 
     render() {
         return (
-            <h2>Here be autocompletion</h2>
+            <div>
+                <h2>Here be autocompletion</h2>
+                <input />
+            </div>
         );
     }
 }
