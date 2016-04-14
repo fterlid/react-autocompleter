@@ -1,6 +1,6 @@
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
-import Autocomparer from '../src/autocompleter';
+import Autocomparer from '../src/autocompleter.jsx';
 
 describe('Autocomparer component tests', () => {
     it('renders an input field', () => {
@@ -10,6 +10,17 @@ describe('Autocomparer component tests', () => {
 
         let result = shallowRenderer.getRenderOutput();
 
-        expect(result.props.children.type).toBe('input');
+        expect(result.props.children[0].type).toBe('input');
+    });
+
+    it('renders suggestion list', () => {
+        let originalList = ['a', 'b', 'c'];
+        let shallowRenderer = TestUtils.createRenderer();
+        let element = React.createElement(Autocomparer, { list: originalList });
+        shallowRenderer.render(element);
+
+        let result = shallowRenderer.getRenderOutput();
+
+        expect(result.props.children[1].props.suggestions).toBe(originalList);
     });
 });
