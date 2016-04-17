@@ -1,5 +1,6 @@
 import React from 'react';
 import SuggestionList from './suggestionList.jsx';
+import SuggestionProvider from './suggestionProvider';
 
 class Autocompleter extends React.Component {
     constructor(props) {
@@ -7,29 +8,27 @@ class Autocompleter extends React.Component {
 
         this.state = {
             searchString: '',
-            suggestions: []
+            suggestionProvider: new SuggestionProvider(this.props.list)
         };
     }
 
-    updateState(event) {
-        let searchString = event.target.value;
-        let suggestions = this.props.list
-            .filter(s => s.indexOf(searchString) >= 0);
-
+    _handleInputChange(event) {
         this.setState({
-            searchString,
-            suggestions
+            searchString: event.target.value
         });
     }
 
     render() {
+        let suggestions = this.state.suggestionProvider
+            .createSuggestions(this.state.searchString);
+        
         return (
             <div>
                 <input
                     value={this.state.searchString}
-                    onChange={e => this.updateState(e)} />
+                    onChange={e => this._handleInputChange(e)} />
                 <SuggestionList
-                    suggestions={this.state.suggestions} />
+                    suggestions={suggestions} />
             </div>
         );
     }
