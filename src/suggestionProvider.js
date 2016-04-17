@@ -3,13 +3,14 @@ class SuggestionProvider {
         this._items = items;
     }
 
-    createSuggestions(searchTerm) {
+    createSuggestions(searchTerm, maxNumOfSuggestions) {
         if (!searchTerm) {
             return [];
         }
 
         return this._items
-            .filter(s => s.indexOf(searchTerm) >= 0);
+            .filter(s => s.indexOf(searchTerm) >= 0)
+            .slice(0, maxNumOfSuggestions);
     }
 }
 

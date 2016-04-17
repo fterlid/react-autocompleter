@@ -20,15 +20,14 @@ class Autocompleter extends React.Component {
 
     render() {
         let suggestions = this.state.suggestionProvider
-            .createSuggestions(this.state.searchString);
+            .createSuggestions(this.state.searchString, this.props.maxSuggestions);
         
         return (
             <div>
                 <input
                     value={this.state.searchString}
                     onChange={e => this._handleInputChange(e)} />
-                <SuggestionList
-                    suggestions={suggestions} />
+                <SuggestionList suggestions={suggestions} />
             </div>
         );
     }
