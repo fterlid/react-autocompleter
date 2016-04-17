@@ -4,6 +4,10 @@ class SuggestionProvider {
     }
 
     createSuggestions(searchTerm) {
+        if (!searchTerm) {
+            return [];
+        }
+
         return this._items
             .filter(s => s.indexOf(searchTerm) >= 0);
     }
