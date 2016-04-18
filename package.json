@@ -10,7 +10,8 @@
     "copy-html": "copy examples\\index.html dist\\examples\\index.html",
     "build-examples": "browserify examples/index.js --transform [babelify] --outfile dist/examples/index.js",
     "build-src": "browserify src/index.js --transform [babelify] --outfile dist/index.js",
-    "build": "npm run clean && npm run copy-html && npm run build-examples && npm run build-src"
+    "build": "npm run build-examples && npm run build-src",
+    "package": "npm run clean && npm run copy-html && npm run build"
   },
   "repository": {
     "type": "git",
