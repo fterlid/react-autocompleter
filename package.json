@@ -6,9 +6,11 @@
   "scripts": {
     "lint": "eslint .",
     "test": "babel-node spec/run.js",
-    "clean": "rimraf dist",
+    "clean": "rimraf dist && mkdir dist && mkdir dist\\examples",
+    "copy-html": "copy examples\\index.html dist\\examples\\index.html",
     "build-examples": "browserify examples/index.js --transform [babelify] --outfile dist/examples/index.js",
-    "copy-html": "copy examples\\index.html dist\\examples\\index.html"
+    "build-src": "browserify src/index.js --transform [babelify] --outfile dist/index.js",
+    "build": "npm run clean && npm run copy-html && npm run build-examples && npm run build-src"
   },
   "repository": {
     "type": "git",
