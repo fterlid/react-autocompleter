@@ -1,14 +1,34 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import SuggestionList from './suggestionList.jsx';
 import SuggestionProvider from '../suggestion-provider/suggestion-provider';
 
-class Autocompleter extends React.Component {
+class Autocompleter extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             searchString: '',
-            suggestionProvider: new SuggestionProvider(this.props.list)
+            suggestionProvider: new SuggestionProvider(this.props.list, this.props.fuzzy)
+        };
+    }
+
+    static get displayName() {
+        return 'Autocompleter';
+    }
+
+    static get propTypes() {
+        return {
+            fuzzy: PropTypes.bool,
+            list: PropTypes.array,
+            maxSuggestions: PropTypes.number
+        };
+    }
+
+    static get defaultProps() {
+        return {
+            fuzzy: false,
+            list: [],
+            maxSuggestions: 5
         };
     }
 
@@ -32,15 +52,5 @@ class Autocompleter extends React.Component {
         );
     }
 }
-
-Autocompleter.propTypes = {
-    list: React.PropTypes.array,
-    maxSuggestions: React.PropTypes.number
-};
-
-Autocompleter.defaultProps = {
-    list: [],
-    maxSuggestions: 5
-};
 
 export default Autocompleter;
