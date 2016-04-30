@@ -17,8 +17,15 @@ class App extends React.Component {
                 <ul>
                     {originalList.map((x,i) => <li key={i}>{x}</li>)}
                 </ul>
-                <h2>Autocomplete</h2>
+
+                <h3>Non-fuzzy</h3>
                 <Autocompleter list={originalList} />
+
+                <h3>Fuzzy</h3>
+                <Autocompleter
+                    list={originalList}
+                    maxSuggestions={4}
+                    fuzzy />
             </div>
         );
     }
