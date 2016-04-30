@@ -1,8 +1,9 @@
 import DefaultRanker from './default-ranker';
 
 class SuggestionProvider {
-    constructor(items) {
+    constructor(items, allowFuzziness) {
         this._items = items;
+        this._allowFuzzyness = !!allowFuzziness;
     }
 
     createSuggestions(searchTerm, maxNumOfSuggestions) {
@@ -13,11 +14,13 @@ class SuggestionProvider {
         let ranker = new DefaultRanker(searchTerm);
 
         return this._items
+            .filter(x => this._allowFuzzyness ? true : x.length >= searchTerm.length)
             .map(s => ({
                 value: s,
                 rank: ranker.rank(s)
             }))
             .sort((a,b) => a.rank - b.rank)
+            .filter(x => this._allowFuzzyness ? true : x.rank < Math.max(x.value.length, searchTerm.length))
             .slice(0, maxNumOfSuggestions)
             .map(s => s.value);
     }
