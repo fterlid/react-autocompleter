@@ -1,6 +1,6 @@
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
-import Autocomparer from '../src/autocompleter.jsx';
+import Autocomparer from '../../src/gui/autocompleter.jsx';
 
 describe('Autocomparer component tests', () => {
     it('renders an input field', () => {

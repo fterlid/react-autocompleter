@@ -1,6 +1,6 @@
 import React from 'react';
 import SuggestionList from './suggestionList.jsx';
-import SuggestionProvider from './suggestion-provider/suggestion-provider';
+import SuggestionProvider from '../suggestion-provider/suggestion-provider';
 
 class Autocompleter extends React.Component {
     constructor(props) {

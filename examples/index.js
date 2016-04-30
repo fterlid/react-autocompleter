@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import Autocompleter from '../src/autocompleter.jsx';
+import Autocompleter from '../src/gui/autocompleter.jsx';
 
 class App extends React.Component {
     constructor(props) {

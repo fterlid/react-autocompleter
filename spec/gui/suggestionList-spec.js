@@ -1,6 +1,6 @@
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
-import SuggestionList from '../src/suggestionList.jsx';
+import SuggestionList from '../../src/gui/suggestionList.jsx';
 
 describe('SuggestionList component tests', () => {
     it('renders a list of suggestions', () => {

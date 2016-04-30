@@ -1,3 +1,3 @@
-import Autocompleter from './autocompleter.jsx';
+import Autocompleter from './gui/autocompleter.jsx';
 
 export default Autocompleter;
