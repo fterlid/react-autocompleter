@@ -1,4 +1,4 @@
-class DefaultRanker {
+class Ranker {
     constructor(searchTerm) {
         this.searchTerm = searchTerm;
     }
@@ -14,4 +14,4 @@ class DefaultRanker {
     }
 }
 
-export default DefaultRanker;
+export default Ranker;

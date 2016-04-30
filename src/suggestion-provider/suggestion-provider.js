@@ -1,4 +1,4 @@
-import DefaultRanker from './default-ranker';
+import Ranker from './ranker';
 
 class SuggestionProvider {
     constructor(items, allowFuzziness) {
@@ -11,7 +11,7 @@ class SuggestionProvider {
             return [];
         }
 
-        let ranker = new DefaultRanker(searchTerm.toLocaleLowerCase());
+        let ranker = new Ranker(searchTerm.toLocaleLowerCase());
 
         return this._items
             .filter(x => this._allowFuzzyness ? true : x.length >= searchTerm.length)
