@@ -3,16 +3,6 @@ import SuggestionProvider from '../../src/suggestion-provider/suggestion-provide
 const itemsToSearch = ['alfa', 'beta', 'delta', 'gamma'];
 
 describe('createSuggestions tests', () => {
-    xit('only returns elements containing the search term', () => {
-        let provider = new SuggestionProvider(itemsToSearch);
-
-        let result = provider.createSuggestions('e');
-
-        expect(result.length).toBe(2);
-        expect(result).toContain('beta');
-        expect(result).toContain('delta');
-    });
-
     it('returns an empty array if search term is falsy', () => {
         let provider = new SuggestionProvider(itemsToSearch);
 
