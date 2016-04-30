@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 
-class SuggestionList extends React.Component {
+class SuggestionList extends Component {
     constructor(props) {
         super(props);
+    }
+
+    static get displayName() {
+        return 'Suggestion list';
+    }
+
+    static get propTypes() {
+        return {
+            suggestions: PropTypes.array
+        };
+    }
+
+    static get defaultProps() {
+        return {
+            suggestions: []
+        };
     }
 
     render() {
@@ -13,13 +29,5 @@ class SuggestionList extends React.Component {
         );
     }
 }
-
-SuggestionList.propTypes = {
-    suggestions: React.PropTypes.array
-};
-
-SuggestionList.defaultProps = {
-    suggestions: []
-};
 
 export default SuggestionList;
