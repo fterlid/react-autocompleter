@@ -11,13 +11,13 @@ class SuggestionProvider {
             return [];
         }
 
-        let ranker = new DefaultRanker(searchTerm);
+        let ranker = new DefaultRanker(searchTerm.toLocaleLowerCase());
 
         return this._items
             .filter(x => this._allowFuzzyness ? true : x.length >= searchTerm.length)
             .map(s => ({
                 value: s,
-                rank: ranker.rank(s)
+                rank: ranker.rank(s.toLocaleLowerCase())
             }))
             .sort((a,b) => a.rank - b.rank)
             .filter(x => this._allowFuzzyness ? true : x.rank < Math.max(x.value.length, searchTerm.length))

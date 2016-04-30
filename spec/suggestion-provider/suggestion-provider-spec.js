@@ -1,6 +1,6 @@
 import SuggestionProvider from '../../src/suggestion-provider/suggestion-provider';
 
-const itemsToSearch = ['alfa', 'beta', 'delta', 'gamma', 'gamma ray', 'gamma ray gun', 'megalomania'];
+const itemsToSearch = ['alfa', 'betA', 'delta', 'gamma', 'gamma ray', 'gamma ray gun', 'megalomania'];
 
 describe('createSuggestions tests', () => {
     it('returns an empty array if search term is falsy', () => {
@@ -17,6 +17,16 @@ describe('createSuggestions tests', () => {
         let result = provider.createSuggestions('a', 3);
 
         expect(result.length).toBe(3);
+    });
+
+    it('is not case sensitive', () => {
+        let provider = new SuggestionProvider(itemsToSearch);
+
+        let result = provider.createSuggestions('A');
+        expect(result.length).toBe(7);
+
+        result = provider.createSuggestions('a');
+        expect(result.length).toBe(7);
     });
 
     describe('fuzzy suggestioning disabled', () => {
