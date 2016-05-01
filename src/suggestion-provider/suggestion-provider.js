@@ -11,16 +11,21 @@ class SuggestionProvider {
             return [];
         }
 
-        let ranker = new Ranker(searchTerm.toLocaleLowerCase());
+        let term = searchTerm.toLocaleLowerCase();
+        let ranker = new Ranker(term);
 
         return this._items
-            .filter(x => this._allowFuzzyness ? true : x.length >= searchTerm.length)
-            .map(s => ({
-                value: s,
-                rank: ranker.rank(s.toLocaleLowerCase())
-            }))
+            .filter(x => this._allowFuzzyness ? true : x.length >= term.length)
+            .map(s => {
+                let key = s.toLocaleLowerCase();
+                return {
+                    key,
+                    value: s,
+                    rank: ranker.rank(key)
+                };
+            })
             .sort((a,b) => a.rank - b.rank)
-            .filter(x => this._allowFuzzyness ? true : x.rank < Math.max(x.value.length, searchTerm.length))
+            .filter(x => this._allowFuzzyness ? true : x.key.indexOf(term) >= 0)
             .slice(0, maxNumOfSuggestions)
             .map(s => s.value);
     }

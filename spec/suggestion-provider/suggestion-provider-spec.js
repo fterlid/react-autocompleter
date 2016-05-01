@@ -19,6 +19,9 @@ describe('createSuggestions tests', () => {
         expect(result.length).toBe(3);
     });
 
+    xit('returns suggestions sorted by rank', () => {
+    });
+
     it('is not case sensitive', () => {
         let provider = new SuggestionProvider(itemsToSearch);
 
@@ -34,7 +37,8 @@ describe('createSuggestions tests', () => {
             let result = provider.createSuggestions('gamma r');
 
             expect(result.length).toBe(2);
-            expect(result).not.toContain('gamma');
+            expect(result).toContain('gamma ray');
+            expect(result).toContain('gamma ray gun');
         }
         it('does not return items that does not include the search term', () => {
             let provider = new SuggestionProvider(itemsToSearch, false);
@@ -48,7 +52,7 @@ describe('createSuggestions tests', () => {
     });
 
     describe('fuzzy suggestioning enabled', () => {
-        it('does not return items that does not include the search term', () => {
+        it('returns suggestions that does not completely contain search term', () => {
             let provider = new SuggestionProvider(itemsToSearch, true);
             let result = provider.createSuggestions('gamma r', 5);
 

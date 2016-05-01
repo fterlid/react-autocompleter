@@ -1,26 +1,23 @@
 import Ranker from '../../src/suggestion-provider/ranker';
 
-describe('rank tests', () => {
-    describe('elements that contains the search term', () => {
-        it('ranks according to the index of the search term', () => {
-            let ranker = new Ranker('ele');
-            expect(ranker.rank('element')).toBe(0);
+describe('rank method', () => {
+    describe('calculates Levenshtein distance', () => {
+        function assertEditDistance(searchTerm, item, expectedDistance) {
+            let ranker = new Ranker(searchTerm);
+            expect(ranker.rank(item)).toBe(expectedDistance);
+        }
 
-            ranker = new Ranker('lem');
-            expect(ranker.rank('element')).toBe(1);
-
-            ranker = new Ranker('t');
-            expect(ranker.rank('element')).toBe(6);
+        it('is the length of the search term if item length is 0', () => {
+            assertEditDistance('term', '', 4);
         });
-    });
 
-    describe('elements that do not contain the search term', () => {
-        it('ranks with a value equal to the length of the longest string', () => {
-            let ranker = new Ranker('xxx');
-            expect(ranker.rank('element')).toBe(7);
+        it('is the length of the item is search term length is 0', () => {
+            assertEditDistance('', 'ice cream', 9);
+        });
 
-            ranker = new Ranker('123456789');
-            expect(ranker.rank('element')).toBe(9);
+        it('is the edit distance between the item and the search term when both have content', () => {
+            assertEditDistance('kitten', 'sitting', 3);
+            assertEditDistance('flaw', 'lawn', 2);
         });
     });
 });
