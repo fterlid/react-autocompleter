@@ -1,25 +1,35 @@
 // See https://en.wikipedia.org/wiki/Levenshtein_distance
 
-// Starting with recursive version just for fun
-function levenshteinDistanceRecursive(s1, s1Length, s2, s2Length) {
-    if (s1Length === 0) {
-        return s2Length;
+function LevenshteinDistance(s1, s2) {
+    // Wagner-Fisher algorithm
+    let x = s1.length + 1;
+    let y = s2.length + 1;
+    let distances = new Array(x);
+
+    for (let i = 0; i < x; i++) {
+        let row = new Array(y);
+        row.fill(0);
+        row[0] = i;
+        distances[i] = row;
     }
 
-    if (s2Length === 0) {
-        return s1Length;
+    for (let j = 1; j < y; j++) {
+        distances[0][j] = j;
     }
 
-    let cost = 0;
-    if (s1[s1Length-1] !== s2[s2Length-1]) {
-        cost = 1;
+    for (let i = 1; i < x; i++) {
+        for (let j = 1; j < y; j++) {
+            let substitutionCost = s1[i-1] === s2[j-1] ? 0 : 1;
+
+            distances[i][j] = Math.min(
+                distances[i-1][j] + 1, // deletion
+                distances[i][j-1] + 1, // insertion
+                distances[i-1][j-1] + substitutionCost // substitution
+            );
+        }
     }
 
-    return Math.min(
-        levenshteinDistanceRecursive(s1, s1Length - 1, s2, s2Length) + 1,
-        levenshteinDistanceRecursive(s1, s1Length, s2, s2Length - 1) + 1,
-        levenshteinDistanceRecursive(s1, s1Length - 1, s2, s2Length - 1) + cost
-    );
+    return distances[x-1][y-1];
 }
 
 class Ranker {
@@ -28,7 +38,7 @@ class Ranker {
     }
 
     rank(element) {
-        return levenshteinDistanceRecursive(this.searchTerm, this.searchTerm.length, element, element.length);
+        return LevenshteinDistance(this.searchTerm, element);
     }
 }
 
